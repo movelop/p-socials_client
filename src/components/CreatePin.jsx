@@ -152,7 +152,7 @@ const CreatePin = ({ user }) => {
                         type="url"
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
-                        placeholder="Add a destination link (optional)"
+                        placeholder="Add a destination link:'https://example.com (optional)"
                         className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
                     />
                     <div className='flex flex-col'>

@@ -88,8 +88,11 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save} }) => {
                             }
                         </div>
                         <div className='flex justify-between items-center gap-2 w-full'>
-                            {destination && (
+                            {destination?.includes('https') ? (
                                 <a 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
                                     href={destination}
                                     target='_blank'
                                     rel='noreferrer'
@@ -98,7 +101,21 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save} }) => {
                                     <BsFillArrowUpRightCircleFill />
                                     {destination.length > 10 ? `${destination.slice(0, 10)}...` : destination}
                                 </a>
-                            )}
+                            ): destination.length > 0 ? (
+                                <a 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                    }}
+                                    href={`https://${destination}`}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    className='bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md'
+                                >
+                                    <BsFillArrowUpRightCircleFill />
+                                    {destination.length > 10 ? `${destination.slice(0, 10)}...` : destination}
+                                </a>
+                            ): null}
+                            
                             {postedBy?._id === user?.googleId && (
                                 <button 
                                     type='button'
