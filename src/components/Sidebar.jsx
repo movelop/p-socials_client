@@ -34,27 +34,28 @@ const Sidebar = ({ closeToggle, user}) => {
                         Home
                     </NavLink>
                     <h3 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Categories</h3>
-                    {categories.slice(0, categories.length -1).map((catergory) => (
+                    {categories.slice(0, categories.length -1).map((category) => (
                         <NavLink 
-                            to = { `/category/${catergory.name}` }
+                            to = { `/category/${category.name}` }
                             className={ ({ isActive }) => isActive ? isActiveStyle : isNotActiveStyle }
                             onClick = {handleCloseSidebar}
-                            key = { catergory.name }
+                            key = { category.name }
                         >
-                            
-                            {catergory.name}
+                            <img src={category.image} className="w-8 h-8 rounded-full shadow-sm" alt = 'category' />
+                            {category.name}
                         </NavLink>
                     ))}
                 </div>
             </div>
             {user && (
                 <Link
-                    to={`user-profile/${user._id}`}
+                    to={`/user-profile/${user._id}`}
                     className = 'flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3'
                     onClick = {handleCloseSidebar}
                 >
                     <img src={user.image} alt="user-profile" className='w-10 h-10 rounded-full'/>
                     <p>{user.userName}</p>
+                    <IoIosArrowForward />
                 </Link>
             )}
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
-
+import { fetchUser } from '../utils/fetchUser'
 import { Sidebar, UserProfile } from '../components';
 import { userQuery } from '../utils/data';
 import { client } from '../client';
@@ -14,7 +14,7 @@ const Home = () => {
     const [user, setUser] = useState();
     const scrollRef = useRef(null);
 
-    const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+    const userInfo = fetchUser();
 
     useEffect(() => {
         const query = userQuery(userInfo?.googleId);
@@ -22,7 +22,7 @@ const Home = () => {
         client.fetch(query).then((data) => {
             setUser(data[0])
         });
-    }, []);
+    }, [userInfo]);
 
     useEffect(() => {
         scrollRef.current.scrollTo(0, 0);
@@ -39,7 +39,7 @@ const Home = () => {
                     <Link to='/'>
                         <img src={logo} alt="logo" className='w-28' />
                     </Link>
-                    <Link to={`user-profile/${user?._id}`}>
+                    <Link to={`/user-profile/${user?._id}`}>
                         <img src={user?.image} alt="logo" className="w-9 h-9 rounded-full " />
                     </Link>  
                 </div>
