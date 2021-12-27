@@ -86,9 +86,26 @@ const PinDetail = ({ user }) => {
                             <MdDownloadForOffline />
                         </a>
                     </div>
-                    {pinDetail.destination && <a href={pinDetail.destination} target='_blank' rel='noreferrer'>
+                    {/* {pinDetail.destination && <a href={pinDetail.destination} target='_blank' rel='noreferrer'>
                         {pinDetail.destination}    
-                    </a>}
+                    </a>} */}
+                    {pinDetail.destination?.includes('https') ? (
+                                <a 
+                                    href={pinDetail.destination}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                >
+                                    {pinDetail.destination}
+                                </a>
+                            ): pinDetail.destination.length > 0 ? (
+                                <a 
+                                    href={`https://${pinDetail.destination}`}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                >
+                                    {pinDetail.destination}
+                                </a>
+                            ): null}
                 </div>
                 <div>
                     <h1 className='text-4xl font-bold break-word mt-3'>
